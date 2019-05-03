@@ -98,6 +98,14 @@ function parseString() {
 
 	lengthOfArr = arr.length;
 
+	// Quick fix: This parser requires a certain formatting of the JSON input file.
+	// This hack makes sure that parsing of JSON call graphs works regardless of 
+	// formatting, given that the input file is smaller than 128MB.
+	if (lengthOfArr == 1) {
+		return JSON.parse(arr[0]);
+	}
+	// End of quick fix.
+
 	arr.forEach(function (a, i) {
 		setProgBar(Math.round((i / lengthOfArr) * 100));
 		console.log("ProgBar value = " + document.getElementById("progress").textContent);
